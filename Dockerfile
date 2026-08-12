@@ -26,7 +26,7 @@ ENV TZ=Asia/Shanghai
 # 32-bit 依赖：libc6:i386 libstdc++6:i386 libgcc-s1:i386 libcurl4:i386 zlib1g:i386
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
-    apt-get install -y --no-install-recommends && \
+    apt-get install -y --no-install-recommends \
         ca-certificates \
         libc6:i386 \
         libstdc++6:i386 \
