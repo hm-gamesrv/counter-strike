@@ -59,6 +59,7 @@ jobs:
                   context: .
                   push: true
                   target: base
+                  provenance: false
                   tags: |
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:${{ steps.prep.outputs.date }}
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:latest
@@ -77,6 +78,7 @@ jobs:
                   context: .
                   push: true
                   target: cs-dm
+                  provenance: false
                   tags: |
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-dm-${{ steps.prep.outputs.date }}
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-dm-latest
@@ -93,6 +95,7 @@ jobs:
                   context: .
                   push: true
                   target: cs-versus
+                  provenance: false
                   tags: |
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-versus-${{ steps.prep.outputs.date }}
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-versus-latest
@@ -109,6 +112,7 @@ jobs:
                   context: .
                   push: true
                   target: cscz-dm
+                  provenance: false
                   tags: |
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:condition-zero-dm-${{ steps.prep.outputs.date }}
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:condition-zero-dm-latest
@@ -125,6 +129,7 @@ jobs:
                   context: .
                   push: true
                   target: cscz-versus
+                  provenance: false
                   tags: |
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:condition-zero-versus-${{ steps.prep.outputs.date }}
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:condition-zero-versus-latest

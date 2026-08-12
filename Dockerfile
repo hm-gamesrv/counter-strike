@@ -84,14 +84,14 @@ CMD ["bash", "/app/start-server-cs.sh", "+map", "aim_sk_ak_m4"]
 # ===================
 FROM base AS cscz-dm
 
-COPY --from=downloader --chown=1000:1000 ["/home/steam/Steam/steamapps/common/Half-Life/czero/maps/de_dust2_cz.bsp", "/app/czero/maps"]
-COPY --from=downloader --chown=1000:1000 ["/home/steam/Steam/steamapps/common/Half-Life/czero/maps/de_dust2_cz.txt", "/app/czero/maps"]
+COPY --from=downloader --chown=1000:1000 ["/home/steam/Steam/steamapps/common/Half-Life/cstrike/maps/de_dust2.bsp", "/app/czero/maps"]
+COPY --from=downloader --chown=1000:1000 ["/home/steam/Steam/steamapps/common/Half-Life/cstrike/maps/de_dust2.txt", "/app/czero/maps"]
 COPY --chown=1000:1000 ["./patch/dm/", "/app"]
 
 RUN cp -r /app/-share/* /app/czero && \
     rm -rf /app/-share
 
-CMD ["bash", "/app/start-server-cscz.sh", "+map", "de_dust2_cz"]
+CMD ["bash", "/app/start-server-cscz.sh", "+map", "de_dust2"]
 
 # ===================
 # 分支：对决 (CSCZ)
@@ -103,4 +103,4 @@ COPY --chown=1000:1000 ["./patch/versus/", "/app"]
 RUN cp -r /app/-share/* /app/czero && \
     rm -rf /app/-share
 
-CMD ["bash", "/app/start-server-cs.sh", "+map", "aim_sk_ak_m4"]
+CMD ["bash", "/app/start-server-cscz.sh", "+map", "aim_sk_ak_m4"]
