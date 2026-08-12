@@ -33,11 +33,19 @@ CS 1.6 插件服务器
 ### 3.1. 构建并运行（Docker）
 
 ```bash
-docker build -t counter-strike:temp . && \
+# 死亡竞赛
+docker build --target dm -t counter-strike:dm-temp . && \
     docker run --rm -it \
         -p 27015:27015/udp \
         -p 27015:27015/tcp \
-        counter-strike:temp
+        counter-strike:dm-temp
+
+# 对决
+docker build --target versus -t counter-strike:versus-temp . && \
+    docker run --rm -it \
+        -p 27015:27015/udp \
+        -p 27015:27015/tcp \
+        counter-strike:versus-temp
 ```
 
 ### 3.2. 运行服务器（Podman）
