@@ -44,7 +44,8 @@ RUN cp -r /app/-share/* /app/cstrike && \
     rm -rf /app/cstrike/maps/* && \
     rm -rf /app/czero/maps/* && \
     rm -rf /app/valve/maps/* && \
-    rm -rf /app/-share
+    rm -rf /app/-share && \
+    chown -R 1000:1000 /app
 
 EXPOSE 27015/udp 27015/tcp
 
