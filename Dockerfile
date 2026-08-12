@@ -22,12 +22,12 @@ EXPOSE 27015/udp 27015/tcp
 
 ENV TZ=Asia/Shanghai
 
+# 64-bit 依赖：ca-certificates
+# 32-bit 依赖：libc6:i386 libstdc++6:i386 libgcc-s1:i386 libcurl4:i386 zlib1g:i386
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y --no-install-recommends && \
-        # 64-bit 依赖
         ca-certificates \
-        # 32-bit 依赖
         libc6:i386 \
         libstdc++6:i386 \
         libgcc-s1:i386 \
