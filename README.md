@@ -14,12 +14,12 @@ CS 1.6 / CSCZ 插件服务器
 
 **可用版本：**
 
-| 游戏模式       | 镜像 tag            |
-| -------------- | ------------------- |
-| CS1.6 死亡竞赛 | `1.6-dm-latest`     |
-| CS1.6 对决     | `1.6-versus-latest` |
-| CSCZ 死亡竞赛  | `cz-dm-latest`      |
-| CSCZ 对决      | `cz-versus-latest`  |
+| 游戏模式       | 镜像 tag                       |
+| -------------- | ------------------------------ |
+| CS1.6 死亡竞赛 | `1.6-dm-latest`                |
+| CS1.6 对决     | `1.6-versus-latest`            |
+| CSCZ 死亡竞赛  | `condition-zero-dm-latest`     |
+| CSCZ 对决      | `condition-zero-versus-latest` |
 
 ## 2. 资源占用信息
 

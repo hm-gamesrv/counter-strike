@@ -51,7 +51,7 @@ jobs:
                   echo "date=$DATE" >> $GITHUB_OUTPUT
 
             # ---------------------------------------------------
-            # 1. 构建 Base 阶段
+            # 0. 构建 Base 阶段
             # ---------------------------------------------------
             - name: Build and push Base image
               uses: docker/build-push-action@v6
@@ -69,9 +69,9 @@ jobs:
                   cache-to: type=gha,mode=max
 
             # ---------------------------------------------------
-            # 2. 构建 1.6 DM 模式
+            # 1. 构建 1.6 DM 模式
             # ---------------------------------------------------
-            - name: Build and push DM image
+            - name: Build and push CS-DM image
               uses: docker/build-push-action@v6
               with:
                   context: .
@@ -85,14 +85,14 @@ jobs:
                   cache-from: type=gha
 
             # ---------------------------------------------------
-            # 3. 构建 1.6 Versus 模式
+            # 2. 构建 1.6 Versus 模式
             # ---------------------------------------------------
-            - name: Build and push Versus image
+            - name: Build and push CS-Versus image
               uses: docker/build-push-action@v6
               with:
                   context: .
                   push: true
-                  target: versus
+                  target: cs-versus
                   tags: |
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-versus-${{ steps.prep.outputs.date }}
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-versus-latest
@@ -101,9 +101,9 @@ jobs:
                   cache-from: type=gha
 
             # ---------------------------------------------------
-            # 4. 构建 CZ DM 模式
+            # 3. 构建 CZ DM 模式
             # ---------------------------------------------------
-            - name: Build and push DM image
+            - name: Build and push CZ-DM image
               uses: docker/build-push-action@v6
               with:
                   context: .
@@ -114,4 +114,20 @@ jobs:
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:condition-zero-dm-latest
                       ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:condition-zero-dm-${{ steps.prep.outputs.date }}
                       ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:condition-zero-dm-latest
+                  cache-from: type=gha
+
+            # ---------------------------------------------------
+            # 4. 构建 CZ Versus 模式
+            # ---------------------------------------------------
+            - name: Build and push CZ-Versus image
+              uses: docker/build-push-action@v6
+              with:
+                  context: .
+                  push: true
+                  target: cscz-versus
+                  tags: |
+                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:condition-zero-versus-${{ steps.prep.outputs.date }}
+                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:condition-zero-versus-latest
+                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:condition-zero-versus-${{ steps.prep.outputs.date }}
+                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:condition-zero-versus-latest
                   cache-from: type=gha
