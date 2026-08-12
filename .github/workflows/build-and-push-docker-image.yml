@@ -51,7 +51,7 @@ jobs:
                   echo "date=$DATE" >> $GITHUB_OUTPUT
 
             # ---------------------------------------------------
-            # 1. 优先构建 Base 阶段
+            # 1. 构建 Base 阶段
             # ---------------------------------------------------
             - name: Build and push Base image
               uses: docker/build-push-action@v6
@@ -69,23 +69,23 @@ jobs:
                   cache-to: type=gha,mode=max
 
             # ---------------------------------------------------
-            # 2. 构建 DM 模式
+            # 2. 构建 1.6 DM 模式
             # ---------------------------------------------------
             - name: Build and push DM image
               uses: docker/build-push-action@v6
               with:
                   context: .
                   push: true
-                  target: dm
+                  target: cs-dm
                   tags: |
-                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:dm-${{ steps.prep.outputs.date }}
-                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:dm-latest
-                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:dm-${{ steps.prep.outputs.date }}
-                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:dm-latest
+                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-dm-${{ steps.prep.outputs.date }}
+                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-dm-latest
+                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:1.6-dm-${{ steps.prep.outputs.date }}
+                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:1.6-dm-latest
                   cache-from: type=gha
 
             # ---------------------------------------------------
-            # 3. 构建 Versus 模式
+            # 3. 构建 1.6 Versus 模式
             # ---------------------------------------------------
             - name: Build and push Versus image
               uses: docker/build-push-action@v6
@@ -94,8 +94,24 @@ jobs:
                   push: true
                   target: versus
                   tags: |
-                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:versus-${{ steps.prep.outputs.date }}
-                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:versus-latest
-                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:versus-${{ steps.prep.outputs.date }}
-                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:versus-latest
+                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-versus-${{ steps.prep.outputs.date }}
+                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-versus-latest
+                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:1.6-versus-${{ steps.prep.outputs.date }}
+                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:1.6-versus-latest
+                  cache-from: type=gha
+
+            # ---------------------------------------------------
+            # 4. 构建 CZ DM 模式
+            # ---------------------------------------------------
+            - name: Build and push DM image
+              uses: docker/build-push-action@v6
+              with:
+                  context: .
+                  push: true
+                  target: cscz-dm
+                  tags: |
+                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:condition-zero-dm-${{ steps.prep.outputs.date }}
+                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:condition-zero-dm-latest
+                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:condition-zero-dm-${{ steps.prep.outputs.date }}
+                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:condition-zero-dm-latest
                   cache-from: type=gha

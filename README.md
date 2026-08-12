@@ -2,7 +2,7 @@
 
 ## 1. 简述
 
-CS 1.6 插件服务器
+CS 1.6 / CSCZ 插件服务器
 
 **特点：**
 
@@ -14,10 +14,12 @@ CS 1.6 插件服务器
 
 **可用版本：**
 
-| 游戏模式 | 镜像 tag        |
-| -------- | --------------- |
-| 死亡竞赛 | `dm-latest`     |
-| 对决     | `versus-latest` |
+| 游戏模式       | 镜像 tag            |
+| -------------- | ------------------- |
+| CS1.6 死亡竞赛 | `1.6-dm-latest`     |
+| CS1.6 对决     | `1.6-versus-latest` |
+| CSCZ 死亡竞赛  | `cz-dm-latest`      |
+| CSCZ 对决      | `cz-versus-latest`  |
 
 ## 2. 资源占用信息
 
@@ -32,33 +34,29 @@ CS 1.6 插件服务器
 
 ### 3.1. 构建并运行（Docker）
 
-```bash
-# 死亡竞赛
-docker build --target dm -t counter-strike:dm-temp . && \
-    docker run --rm -it \
-        -p 27015:27015/udp \
-        -p 27015:27015/tcp \
-        counter-strike:dm-temp
+例：CS1.6 死亡竞赛：
 
-# 对决
-docker build --target versus -t counter-strike:versus-temp . && \
+```bash
+docker build --target cs-dm -t counter-strike:1.6-dm-temp . && \
     docker run --rm -it \
         -p 27015:27015/udp \
         -p 27015:27015/tcp \
-        counter-strike:versus-temp
+        counter-strike:1.6-dm-temp
 ```
 
 ### 3.2. 运行服务器（Podman）
 
+例：CS1.6 死亡竞赛（1.6-dm-latest）：
+
 ```bash
-IMAGE=ghcr.io/hm-gamesrv/counter-strike:dm-latest
+IMAGE=ghcr.io/hm-gamesrv/counter-strike:1.6-dm-latest
 
 if ! podman pull "$IMAGE"; then
     exit 1
 fi
 
 podman run --rm -it \
-    --name counter-strike-dm \
+    --name counter-strike-1.6-dm \
     --userns keep-id \
     --network pasta \
     -p 27015:27015/udp \
