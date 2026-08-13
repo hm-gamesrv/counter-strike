@@ -1,6 +1,7 @@
 #!/bin/bash
+set -euo pipefail
 
-./hlds_run -game cstrike \
+cd /app && exec /app/hlds_run -game cstrike \
     -insecure \
     -nomaster \
     -strictportbind \

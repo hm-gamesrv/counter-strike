@@ -1,6 +1,7 @@
 #!/bin/bash
+set -euo pipefail
 
-./hlds_run -game czero \
+cd /app && exec /app/hlds_run -game czero \
     -insecure \
     -nomaster \
     -strictportbind \
