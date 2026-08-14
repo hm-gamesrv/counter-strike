@@ -1,0 +1,55 @@
+{
+    "schemaVersion": 1,
+    "key": "counter-strike",
+    "name": "Counter-Strike 1.6 / CS:CZ",
+    "registries": {
+        "ghcr": "ghcr.io/hm-gamesrv/",
+        "aliyun": "crpi-i9e7zrpnu4792a5m.cn-chengdu.personal.cr.aliyuncs.com/hiromuraki/"
+    },
+    "resources": {
+        "ports": [
+            {
+                "host": "27015",
+                "container": "27015",
+                "proto": "udp",
+                "required": true,
+                "desc": "游戏联机端口"
+            },
+            {
+                "host": "27015",
+                "container": "27015",
+                "proto": "tcp",
+                "desc": "RCON 端口"
+            }
+        ],
+        "volumes": [],
+        "env": [],
+        "extraArgs": ""
+    },
+    "variants": [
+        {
+            "key": "1.6-dm",
+            "name": "CS1.6 死亡竞赛",
+            "tag": "1.6-dm-latest",
+            "container": "counter-strike-1.6-dm-server"
+        },
+        {
+            "key": "1.6-versus",
+            "name": "CS1.6 对决",
+            "tag": "1.6-versus-latest",
+            "container": "counter-strike-1.6-versus-server"
+        },
+        {
+            "key": "condition-zero-dm",
+            "name": "CS:CZ 死亡竞赛",
+            "tag": "condition-zero-dm-latest",
+            "container": "counter-strike-condition-zero-dm-server"
+        },
+        {
+            "key": "condition-zero-versus",
+            "name": "CS:CZ 对决",
+            "tag": "condition-zero-versus-latest",
+            "container": "counter-strike-condition-zero-versus-server"
+        }
+    ]
+}
