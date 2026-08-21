@@ -6,7 +6,7 @@ CS 1.6 / CSCZ 插件服务器
 
 **特点：**
 
-- 基于 legacy 版本的服务端
+- 基于 steam_legacy (Pre-25th Anniversary Build) 版本的服务端
 - 配合 ReHLDS + ReGameDLL_CS + Metamod-R & AMX Mod X 完成基架搭建
 - 使用 ReDeathmatch 实现死斗模式
 - 使用 YaPB 实现 Bot 功能
@@ -14,12 +14,12 @@ CS 1.6 / CSCZ 插件服务器
 
 **可用版本：**
 
-| 游戏模式       | 镜像 tag                       |
-| -------------- | ------------------------------ |
-| CS1.6 死亡竞赛 | `1.6-dm-latest`                |
-| CS1.6 对决     | `1.6-versus-latest`            |
-| CSCZ 死亡竞赛  | `condition-zero-dm-latest`     |
-| CSCZ 对决      | `condition-zero-versus-latest` |
+| 游戏模式       | 镜像 tag                |
+| -------------- | ----------------------- |
+| CS1.6 死亡竞赛 | `1.6-dm`                |
+| CS1.6 对决     | `1.6-versus`            |
+| CSCZ 死亡竞赛  | `condition-zero-dm`     |
+| CSCZ 对决      | `condition-zero-versus` |
 
 ## 2. 资源占用信息
 

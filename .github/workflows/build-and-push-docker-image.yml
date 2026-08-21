@@ -81,9 +81,9 @@ jobs:
                   provenance: false
                   tags: |
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-dm-${{ steps.prep.outputs.date }}
-                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-dm-latest
+                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-dm
                       ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:1.6-dm-${{ steps.prep.outputs.date }}
-                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:1.6-dm-latest
+                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:1.6-dm
                   cache-from: type=gha
 
             # ---------------------------------------------------
@@ -98,9 +98,9 @@ jobs:
                   provenance: false
                   tags: |
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-versus-${{ steps.prep.outputs.date }}
-                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-versus-latest
+                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:1.6-versus
                       ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:1.6-versus-${{ steps.prep.outputs.date }}
-                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:1.6-versus-latest
+                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:1.6-versus
                   cache-from: type=gha
 
             # ---------------------------------------------------
@@ -115,9 +115,9 @@ jobs:
                   provenance: false
                   tags: |
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:condition-zero-dm-${{ steps.prep.outputs.date }}
-                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:condition-zero-dm-latest
+                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:condition-zero-dm
                       ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:condition-zero-dm-${{ steps.prep.outputs.date }}
-                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:condition-zero-dm-latest
+                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:condition-zero-dm
                   cache-from: type=gha
 
             # ---------------------------------------------------
@@ -132,7 +132,7 @@ jobs:
                   provenance: false
                   tags: |
                       ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:condition-zero-versus-${{ steps.prep.outputs.date }}
-                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:condition-zero-versus-latest
+                      ghcr.io/${{ steps.prep.outputs.owner }}/counter-strike:condition-zero-versus
                       ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:condition-zero-versus-${{ steps.prep.outputs.date }}
-                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:condition-zero-versus-latest
+                      ${{ secrets.ALIYUN_REGISTRY }}/${{ secrets.ALIYUN_REGISTRY_NAMESPACE }}/counter-strike:condition-zero-versus
                   cache-from: type=gha
