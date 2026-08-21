@@ -17,11 +17,11 @@ RUN mkdir -p /opt/depot-downloader \
 # 81: Condition Zero Base Content
 # 90: Linux dedicated server
 # 1006: Steamworks SDK Redist (LINUX32)
-RUN /opt/depot-downloader/DepotDownloader -os linux -dir /download -app 90 -depot 1 -manifest 5928322771446233610
-RUN /opt/depot-downloader/DepotDownloader -os linux -dir /download -app 90 -depot 11 -manifest 4720911300072406946
-RUN /opt/depot-downloader/DepotDownloader -os linux -dir /download -app 90 -depot 81 -manifest 3601230779843470737
-RUN /opt/depot-downloader/DepotDownloader -os linux -dir /download -app 90 -depot 4 -manifest 8690279432129063737
-RUN /opt/depot-downloader/DepotDownloader -os linux -dir /download -app 90 -depot 1006 -manifest 6403079453713498174 
+RUN /opt/depot-downloader/DepotDownloader -os linux -validate -dir /download -app 90 -depot 1 -manifest 5928322771446233610
+RUN /opt/depot-downloader/DepotDownloader -os linux -validate -dir /download -app 90 -depot 11 -manifest 4720911300072406946
+RUN /opt/depot-downloader/DepotDownloader -os linux -validate -dir /download -app 90 -depot 81 -manifest 3601230779843470737
+RUN /opt/depot-downloader/DepotDownloader -os linux -validate -dir /download -app 90 -depot 4 -manifest 8690279432129063737
+RUN /opt/depot-downloader/DepotDownloader -os linux -validate -dir /download -app 90 -depot 1006 -manifest 6403079453713498174 
 
 # =================
 # Prune

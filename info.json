@@ -30,25 +30,25 @@
         {
             "key": "1.6-dm",
             "name": "CS1.6 死亡竞赛",
-            "tag": "1.6-dm-latest",
+            "tag": "1.6-dm",
             "container": "counter-strike-1.6-dm-server"
         },
         {
             "key": "1.6-versus",
             "name": "CS1.6 对决",
-            "tag": "1.6-versus-latest",
+            "tag": "1.6-versus",
             "container": "counter-strike-1.6-versus-server"
         },
         {
             "key": "condition-zero-dm",
             "name": "CS:CZ 死亡竞赛",
-            "tag": "condition-zero-dm-latest",
+            "tag": "condition-zero-dm",
             "container": "counter-strike-condition-zero-dm-server"
         },
         {
             "key": "condition-zero-versus",
             "name": "CS:CZ 对决",
-            "tag": "condition-zero-versus-latest",
+            "tag": "condition-zero-versus",
             "container": "counter-strike-condition-zero-versus-server"
         }
     ]
