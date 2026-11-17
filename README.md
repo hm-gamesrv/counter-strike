@@ -90,7 +90,9 @@ podman run --rm -it \
 
 | 路径           | 说明                                                         |
 | -------------- | ------------------------------------------------------------ |
-| `Dockerfile`   | builder 下载服务端并安装组件，`base` 运行                    |
-| `install.py`   | 下载 ReHLDS / ReGameDLL / Metamod / AMXX / ReAPI / ReUnion / YaPB，部署到 `cstrike` 和 `czero` |
+| `Dockerfile`   | builder 下载服务端并安装组件，`dm-builder` 组装死斗文件，`base` / `cs-dm` 运行 |
+| `install.py`   | 下载 ReHLDS / ReGameDLL / Metamod / AMXX / ReAPI / ReUnion / YaPB / AmxxEasyHttp，部署到 `cstrike` 和 `czero` |
 | `patch/base`   | 启动脚本、`mapcycle.txt`                                      |
-| `patch/dm`     | ReDeathmatch 插件、死斗配置、地图                                |
+| `patch/dm/PATCH.py` | 构建时下载 ReDeathmatch release 并跳过 `scripting/`      |
+| `patch/dm/share` | 死斗本地覆盖：`server*.cfg`、`cfg/gamemode_*.cfg`、出生点、导航图 |
+| `patch/dm/cstrike` | 死斗地图                                                |

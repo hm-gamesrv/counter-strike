@@ -1,20 +1,18 @@
 #!/usr/bin/env python3
-"""Deploy a ReDeathmatch release into patch/dm/share.
+"""Assemble the ReDeathmatch cstrike tree for the docker build.
 
-The release archive contains a cstrike/ tree with plugins, configs, lang and
-spawn data.  This script extracts it and merges everything into the target
-directory.  An existing configs/plugins-redm.ini is kept, so local debug flags
-are not overwritten on upgrade.
+Downloads a ReDeathmatch release, extracts it, and copies it into the target
+directory.  The bundled scripting sources are skipped: they are not needed at
+runtime.  Local overrides are copied on top by the Dockerfile afterwards.
 
 Usage:
-    python3 PATCH.py [--version 1.0.0-b11] [--dest patch/dm/share]
+    python3 PATCH.py --dest /out [--version 1.0.0-b11]
 """
 
 from __future__ import annotations
 
 import argparse
 import os
-import re
 import shutil
 import tempfile
 import time
@@ -22,8 +20,8 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
-REDM_VER = os.environ.get("REDM_VER", "1.0.0-b11")
-KEEP = "addons/amxmodx/configs/plugins-redm.ini"
+REDM_VER = os.environ.get("REDM_VER") or "1.0.0-b11"
+SKIP = "addons/amxmodx/scripting"
 
 
 def log(message: str) -> None:
@@ -46,15 +44,6 @@ def download(url: str, dest: Path, attempts: int = 3) -> None:
             time.sleep(2)
 
 
-def disable_debug(cfg: Path) -> None:
-    """Comment out the per-plugin debug flag, as recommended by the guide."""
-    if not cfg.exists():
-        return
-    text = cfg.read_text(encoding="utf-8", errors="surrogateescape")
-    text = re.sub(r"(?m)^(\s*\S+\s+)(debug)\s*$", r"\1;debug", text)
-    cfg.write_text(text, encoding="utf-8", errors="surrogateescape")
-
-
 def merge(source: Path, dest: Path) -> None:
     if not source.is_dir():
         raise SystemExit(f"error: missing directory: {source}")
@@ -62,45 +51,39 @@ def merge(source: Path, dest: Path) -> None:
         if not item.is_file():
             continue
         relative = item.relative_to(source)
-        target = dest / relative
-        if relative.as_posix() == KEEP and target.exists():
-            log(f"keeping {relative}")
+        if relative.as_posix().startswith(SKIP):
             continue
+        target = dest / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(item, target)
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="deploy a ReDeathmatch release")
+    parser = argparse.ArgumentParser(description="assemble a ReDeathmatch cstrike tree")
     parser.add_argument(
         "--version",
         default=REDM_VER,
         help="release tag (default: %(default)s)",
     )
-    parser.add_argument(
-        "--dest",
-        default=str(Path(__file__).resolve().parent / "share"),
-        help="target directory (default: patch/dm/share)",
-    )
+    parser.add_argument("--dest", required=True, help="target directory")
     args = parser.parse_args()
 
+    version = args.version or REDM_VER
     dest = Path(args.dest).resolve()
-    dest.mkdir(parents=True, exist_ok=True)
-
     url = (
         "https://github.com/ReDeathmatch/ReDeathmatch_AMXX/releases/download/"
-        f"{args.version}/ReDeathmatch-{args.version}.zip"
+        f"{version}/ReDeathmatch-{version}.zip"
     )
 
     with tempfile.TemporaryDirectory(prefix="redm-") as tmp:
         workdir = Path(tmp)
         archive = workdir / "redm.zip"
         download(url, archive)
+        root = workdir / "release"
         with zipfile.ZipFile(archive) as bundle:
-            bundle.extractall(workdir / "release")
-        merge(workdir / "release/cstrike", dest)
+            bundle.extractall(root)
+        merge(root / "cstrike", dest)
 
-    disable_debug(dest / KEEP)
     log(f"done: {dest}")
 
 

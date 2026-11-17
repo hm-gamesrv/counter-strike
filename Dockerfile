@@ -61,12 +61,30 @@ USER 1000:1000
 CMD ["bash", "/app/start-server.sh", "+map", "de_dust2"]
 
 # ===================
+# 死亡竞赛文件组装
+# ===================
+FROM python:3.15-slim AS dm-builder
+
+ARG REDM_VER
+ENV REDM_VER=${REDM_VER}
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY patch/dm/PATCH.py /usr/local/bin/PATCH.py
+RUN python3 /usr/local/bin/PATCH.py --dest /out
+
+# 本地覆盖：手写配置、出生点、导航图
+COPY patch/dm/share/ /out/
+
+# ===================
 # 分支：死亡竞赛
 # ===================
 FROM base AS cs-dm
 
-COPY --chown=1000:1000 ["./patch/dm/share/", "/app/cstrike/"]
-COPY --chown=1000:1000 ["./patch/dm/share/", "/app/czero/"]
+COPY --from=dm-builder --chown=1000:1000 ["/out/", "/app/cstrike/"]
+COPY --from=dm-builder --chown=1000:1000 ["/out/", "/app/czero/"]
 COPY --chown=1000:1000 ["./patch/dm/cstrike/", "/app/cstrike/"]
 
 CMD ["bash", "/app/start-server.sh", "+map", "de_dust2"]
