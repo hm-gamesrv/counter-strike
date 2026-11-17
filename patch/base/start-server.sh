@@ -15,4 +15,5 @@ cd /app && exec /app/hlds_run -game "$GAME" \
     -port 27015 \
     -norestart \
     +maxplayers 16 \
+    +redm_update_notify 0 \
     "$@"

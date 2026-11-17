@@ -2,8 +2,8 @@
 """在已下载的 CS 1.6 / Condition Zero 服务端上部署组件。
 
 服务端文件由 Dockerfile 的 DepotDownloader 步骤下载，本脚本负责：
-    1. 下载 ReHLDS / ReGameDLL_CS / Metamod-R / AMX Mod X / ReAPI / ReUnion，
-       解压合并成一份公共 share；
+    1. 下载 ReHLDS / ReGameDLL_CS / Metamod-R / AMX Mod X / ReAPI / ReUnion /
+       YaPB / AmxxEasyHttp，解压合并成一份公共 share；
     2. 用 share 部署引擎（ReHLDS 根级文件）；
     3. 分别把 share 部署到 cstrike 和 czero，两者互不依赖；
     4. 清理多余地图与无用库。
@@ -35,6 +35,7 @@ AMXX_VER = os.environ.get("AMXX_VER", "1.10.0-git5488")
 REAPI_VER = os.environ.get("REAPI_VER", "5.29.0.358")
 REUNION_VER = os.environ.get("REUNION_VER", "0.2.0.34")
 YAPB_VER = os.environ.get("YAPB_VER", "4.8.1427")
+EASYHTTP_VER = os.environ.get("EASYHTTP_VER", "1.5.0")
 REUNION_SALT = os.environ.get("REUNION_SALT", "cs16-dm-default-salt-change-me")
 
 
@@ -254,6 +255,25 @@ def download_yapb(share: Path, workdir: Path) -> None:
     merge_tree(root / "addons", share / "addons")
 
 
+def download_easyhttp(share: Path, workdir: Path) -> None:
+    """AmxxEasyHttp 是 AMXX 的 HTTP 模块，ReDeathmatch 用它做版本检查。"""
+    log(f"preparing AmxxEasyHttp {EASYHTTP_VER}")
+    archive = workdir / "easyhttp.zip"
+    download(
+        "https://github.com/Next21Team/AmxxEasyHttp/releases/download/"
+        f"{EASYHTTP_VER}/AmxxEasyHttp-{EASYHTTP_VER}-linux-i386.zip",
+        archive,
+    )
+    root = workdir / "easyhttp"
+    extract_zip(archive, root)
+    merge_tree(root / "addons", share / "addons")
+
+    modules = share / "addons/amxmodx/configs/modules.ini"
+    if not modules.exists():
+        fail(f"missing AMX Mod X modules config: {modules}")
+    ensure_amxx_module(modules, "easy_http")
+
+
 def write_metamod_plugins(share: Path) -> None:
     """按加载顺序写 Metamod 插件列表。"""
     plugins = share / "addons/metamod/plugins.ini"
@@ -270,7 +290,7 @@ def prepare_share(workdir: Path) -> tuple[Path, Path]:
     """下载并解压所有组件，返回 (share, engine)。
 
     share 可直接叠加到 cstrike 或 czero（等价于 patch/base_1/-share）：
-        addons/      Metamod-R + AMX Mod X + ReAPI + ReUnion + YaPB
+        addons/      Metamod-R + AMX Mod X + ReAPI + ReUnion + YaPB + AmxxEasyHttp
         dlls/cs.so   ReGameDLL_CS
         delta.lst / game.cfg / game_init.cfg
         reunion.cfg  ReUnion 配置
@@ -286,6 +306,7 @@ def prepare_share(workdir: Path) -> tuple[Path, Path]:
     download_reapi(share, workdir)
     download_reunion(share, workdir)
     download_yapb(share, workdir)
+    download_easyhttp(share, workdir)
     write_metamod_plugins(share)
     return share, engine
 

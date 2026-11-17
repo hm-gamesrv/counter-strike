@@ -40,6 +40,7 @@ bash /app/start-server.sh -game czero +map de_dust2_cz
 | ReAPI         | 5.29.0.358       |
 | ReUnion       | 0.2.0.34         |
 | YaPB          | 4.8.1427         |
+| AmxxEasyHttp  | 1.5.0            |
 | ReDeathmatch  | 1.0.0-b11        |
 
 ## 2. 资源占用信息
